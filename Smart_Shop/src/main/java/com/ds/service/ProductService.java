@@ -195,6 +195,41 @@ public class ProductService implements IProducts {
 		Scanner scan=new Scanner(System.in);
 		
 		System.out.println("------------------Search Products------------------");
+		System.out.println("Enter product name or keyword to search ");
+		
+		String keyword=scan.nextLine();
+		
+		Connection con=dbConnection.getDbConnection();
+		
+		try {
+			PreparedStatement ps=con.prepareStatement(search);
+			
+			String searchKeyword ="%"+keyword+"%";
+			
+			ps.setString(1, searchKeyword);
+			ps.setString(2, searchKeyword);
+			
+			ResultSet rs=ps.executeQuery();
+			
+			boolean found=false;
+			
+			System.out.println("showing matching products:");
+			System.out.println("product Id | Name | Description | Price | Quantity");
+			System.out.println("---------------------------------------------------");
+			
+			while(rs.next()) {
+				
+				found=true;
+				
+				System.out.println(rs.getInt("product_id")+ " | " +rs.getString("product_name")+" | "+rs.getString("discription")+"|"+rs.getDouble("price")+"|"+rs.getInt("quantity"));
+			}
+			if(!found) {
+				System.out.println("No matching products found ");
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	

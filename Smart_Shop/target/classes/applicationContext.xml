@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <!--depedent class configuration-->
+<bean id="user" class="com.ds.model.User"></bean>
+<bean id="dbConnection" class="com.ds.DbConnection.DbConnection"></bean>
+<bean id="product" class="com.ds.model.Products"></bean>
+<bean id="date" class="java.util.Date"></bean>
+<bean id="purchase" class="com.ds.model.Purchases"></bean>
+
+<!-- Target Class UserService Configuration-->
+<bean id="userservice" class="com.ds.service.UserService">
+<constructor-arg ref="user"></constructor-arg>
+<constructor-arg ref="dbConnection"></constructor-arg>
+<constructor-arg ref="productservice"></constructor-arg>
+<constructor-arg ref="purchaseService"></constructor-arg>
+</bean>
+
+<!-- Target class ProductService-->
+<bean id="productservice" class="com.ds.service.ProductService">
+<constructor-arg ref="product"></constructor-arg>
+<constructor-arg ref="dbConnection"></constructor-arg>
+</bean>
+
+<!-- Target class PurchasesService-->
+<bean id="purchaseService" class="com.ds.service.PurchaseService">
+<constructor-arg ref="purchase"></constructor-arg>
+<constructor-arg ref="dbConnection"></constructor-arg>
+
+</bean>
+</beans>

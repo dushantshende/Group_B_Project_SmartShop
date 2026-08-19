@@ -30,6 +30,8 @@ public class PurchaseService implements IPurchases {
 	
 	private String purchaseHistoryQuery ="{ call get_purchase_history()}";
 	
+	private String viewCartQuery="{call get_user_cart(?)}";
+	
 	Purchases purchase;
 	DbConnection dbConnection;
 	
@@ -157,6 +159,36 @@ public class PurchaseService implements IPurchases {
 			e.printStackTrace();
 		}
 		
+	}
+	public void viewCart(Integer userId) {
+		Connection con = dbConnection.getDbConnection();
+		try {
+			CallableStatement cs=con.prepareCall(viewCartQuery);
+			cs.setInt(1, userId);
+			
+			ResultSet rs=cs.executeQuery();
+			
+			double totalAmount =0;
+			
+			System.out.println("-----------------View Cart-------------------");
+			System.out.println("Product Name | Quantity | Price | Subtotal");
+			System.out.println("----------------------------------------------");
+			
+			while(rs.next()) {
+				String productName=rs.getString("product_name");
+				int quantity =rs.getInt("quantity");
+				double price=rs.getDouble("price");
+				double subtotal=rs.getDouble("subtotal");
+				
+				System.out.println(	productName + " | "+ quantity + " | "+ price+" | "+	subtotal);
+				totalAmount=totalAmount+subtotal;
+			}
+			System.out.println("--------------------------------------------------------");
+			System.out.println("Total Amount: "+totalAmount);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

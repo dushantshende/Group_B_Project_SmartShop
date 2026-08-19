@@ -20,6 +20,12 @@ public class ProductService implements IProducts {
 			SELECT * FROM PRODUCTS;
 			""";
 	
+	final String search="""
+			SELECT * FROM PRODUCTS 
+			WHERE LOWER(PRODUCT_NAME) LIKE LOWER(?)
+			OR LOWER(DISCRIPTION) LIKE LOWER(?);
+			""";
+	
 	final String delete="""
 			DELETE FROM PRODUCTS WHERE PRODUCT_ID=?;
 			""";
@@ -46,10 +52,10 @@ public class ProductService implements IProducts {
 		Scanner scan=new Scanner(System.in);
 		
 		System.out.println("Enter Product Name: ");
-		String product=scan.next();
+		String product=scan.nextLine();
 		this.product.setProduct_name(product);
 		
-		scan.nextLine();
+		//scan.nextLine();
 		
 		System.out.println("Enter product Description: ");
 		String description =scan.nextLine();
@@ -183,6 +189,12 @@ public class ProductService implements IProducts {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void searchProduct() {
+		Scanner scan=new Scanner(System.in);
+		
+		System.out.println("------------------Search Products------------------");
 	}
 
 	

@@ -220,7 +220,8 @@ public class UserService implements IUserDetails{
 			System.out.println("-------------User Menu-----------------");
 			System.out.println("1. View Products");
 			System.out.println("2. Purchase Product");
-			System.out.println("3. Logout");
+			System.out.println("3. View Cart");
+			System.out.println("4. Logout");
 			
 			System.out.println("Enter Your Choice: ");
 			int choice=scan.nextInt();
@@ -237,7 +238,11 @@ public class UserService implements IUserDetails{
 				purchaseService.setPurchaseOrder(loggedInUserId);
 				break;
 				
-			case 3:
+			case 3: 
+				System.out.println("View cart selected");
+				purchaseService.viewCart(loggedInUserId);
+				break;
+			case 4:
 				System.out.println("Logout Successfully");
 				return;
 				

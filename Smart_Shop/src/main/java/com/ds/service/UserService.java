@@ -162,6 +162,8 @@ public class UserService implements IUserDetails{
 		
 		public void adminMenu() {
 			Scanner scan=new Scanner(System.in);
+			
+			while(true) {
 			System.out.println("-------------Admin Menu---------------");
 			System.out.println("1. Add Product");
 			System.out.println("2. Update Product");
@@ -202,19 +204,19 @@ public class UserService implements IUserDetails{
 				break;
 				
 			case 6:
-				System.out.println("Logout");
-				break;
+				System.out.println("Logout Successfully");
+				return;
 				
 				default :
 					System.out.println("Invalid choice");
 			}
 			
 		}
-		
+		}
 		public void userMenu() {
 			
 			Scanner scan=new Scanner(System.in);
-			
+			while(true) {
 			System.out.println("-------------User Menu-----------------");
 			System.out.println("1. View Products");
 			System.out.println("2. Purchase Product");
@@ -236,13 +238,13 @@ public class UserService implements IUserDetails{
 				break;
 				
 			case 3:
-				System.out.println("Logout");
-				break;
+				System.out.println("Logout Successfully");
+				return;
 				
 				default:
 					System.out.println("Invalid choice");
 			}
-		}
+		}}
 
 }
 
